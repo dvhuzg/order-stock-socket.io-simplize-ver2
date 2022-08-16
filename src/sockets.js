@@ -1,6 +1,9 @@
 import { v4 as uuid } from "uuid";
 
 let Commands = [];
+var a = Array.apply(null, { length: Commands.length });
+var b = Array.apply(null, { length: Commands.length });
+
 
 export default (io) => {
   io.on("connection", (socket) => {
@@ -14,9 +17,9 @@ export default (io) => {
       const Command = { ...newCommand, id: uuid() };
       Commands.push(Command);
       io.emit("server:newCommand", Command);
-      var a = Array.apply(null, { length: Commands.length });
+
       for (var i = 0; i < Commands.length; i++) {
-        for (var j = i + 1; j < Commands.length; j++) {
+        for (var j = 0; j < Commands.length; j++) {
           if (Commands[i].code === Commands[j].code) {
             if (Commands[i].order_type !== Commands[j].order_type) {
               if (
@@ -32,13 +35,16 @@ export default (io) => {
                 a[j] = a[i];
                 Commands[i].quantity = Commands[i].quantity - a[i];
                 Commands[j].quantity = Commands[j].quantity - a[i];
+                b[i]=j;
+                b[j]=i;
+                socket.emit("server:matchOrder", Commands, a,b);
               }
             }
           }
         }
       }
+
       console.log(Commands);
-      console.log(a)
     });
     socket.on("client:deleteCommand", (CommandId) => {
       // console.log(CommandId);

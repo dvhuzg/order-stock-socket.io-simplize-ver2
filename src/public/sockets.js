@@ -42,6 +42,8 @@ socket.on("server:loadCommands", renderCommands);
 
 socket.on("server:newCommand", appendCommand);
 
+socket.on("server:matchOrder", renderCommands);
+
 socket.on("server:selectedCommand", (Command) => {
   const code = document.querySelector("#code");
   const quantity = document.querySelector("#quantity");
