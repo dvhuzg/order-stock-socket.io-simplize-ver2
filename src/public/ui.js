@@ -1,44 +1,30 @@
-const CommandsList = document.querySelector("#Commands");
+const OrdersList = document.querySelector("#Orders");
 
 let savedId = "";
 
-const CommandUI = (Command,a,b) => {
+const OrderUI = (Order, a, b, c) => {
   const div = document.createElement("tr");
   div.innerHTML = `
-  <td>${Command.code}</td>
-  <td>${Command.quantity}</td>
-  <td>${Command.price}</td>
-  <td>${Command.order_type}</td>
-  <td>${a===undefined?'Pending':a}</td>
-  <td>${b}</td>
-  <td>
-  <button class="btn btn-danger delete" data-id="${Command.id}">delete</button>
-
-  </td>
+  <td>${c}</td>
+  <td>${Order.code}</td>
+  <td>${Order.quantity}</td>
+  <td>${Order.price}</td>
+  <td>${Order.order_type}</td>
+  <td>${a === undefined ? "Pending" : a}</td>
+  <td>${b == undefined ? "Pending" : b}</td>
 `;
-  const btnDelete = div.querySelector(".delete");
-  // const btnUpdate = div.querySelector(".update");
-
-  btnDelete.addEventListener("click", () =>
-    deleteCommand(btnDelete.dataset.id)
-  );
-
-  // btnUpdate.addEventListener("click", () => {
-  //   socket.emit("client:getCommand", btnUpdate.dataset.id);
-  // });
-
   return div;
 };
 
-const renderCommands = (Commands,a,b) => {
+const renderOrders = (Orders, a, b, c) => {
   savedId = "";
   // console.log(a);
-  CommandsList.innerHTML = "";
-  Commands.forEach((Command,index) =>
-    CommandsList.append(CommandUI(Command,a[index],b[index]))
+  OrdersList.innerHTML = "";
+  Orders.forEach((Order, index) =>
+    OrdersList.append(OrderUI(Order, a[index], b[index], c[index + 1]))
   );
 };
 
-const appendCommand = (Command) => {
-  CommandsList.append(CommandUI(Command));
+const appendOrder = (Order) => {
+  OrdersList.append(OrderUI(Order));
 };

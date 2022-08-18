@@ -1,12 +1,12 @@
 const socket = io.connect();
 
 /**
- * create a new Command
- * @param {string} title a title for a new Command
- * @param {string} description a description for a new Command
+ * create a new Order
+ * @param {string} title a title for a new Order
+ * @param {string} description a description for a new Order
  */
-const saveCommand = (code, quantity, price, order_type) => {
-  socket.emit("client:newCommand", {
+const saveOrder = (code, quantity, price, order_type) => {
+  socket.emit("client:newOrder", {
     code,
     quantity,
     price,
@@ -15,21 +15,21 @@ const saveCommand = (code, quantity, price, order_type) => {
 };
 
 /**
- * delete a Command based on an Id
- * @param {string} id a Command ID
+ * delete a Order based on an Id
+ * @param {string} id a Order ID
  */
-const deleteCommand = (id) => {
-  socket.emit("client:deleteCommand", id);
+const deleteOrder = (id) => {
+  socket.emit("client:deleteOrder", id);
 };
 
 /**
  *
- * @param {string} id Command ID
- * @param {string} title Command title
- * @param {string} description Command description
+ * @param {string} id Order ID
+ * @param {string} title Order title
+ * @param {string} description Order description
  */
-const updateCommand = (id, code, quantity, price, order_type) => {
-  socket.emit("client:updateCommand", {
+const updateOrder = (id, code, quantity, price, order_type) => {
+  socket.emit("client:updateOrder", {
     id,
     code,
     quantity,
@@ -38,22 +38,22 @@ const updateCommand = (id, code, quantity, price, order_type) => {
   });
 };
 
-socket.on("server:loadCommands", renderCommands);
+socket.on("server:loadOrders", renderOrders);
 
-socket.on("server:newCommand", appendCommand);
+socket.on("server:newOrder", appendOrder);
 
-socket.on("server:matchOrder", renderCommands);
+socket.on("server:matchOrder", renderOrders);
 
-socket.on("server:selectedCommand", (Command) => {
+socket.on("server:selectedOrder", (Order) => {
   const code = document.querySelector("#code");
   const quantity = document.querySelector("#quantity");
   const price = document.querySelector("#price");
   const order_type = document.querySelector("#order_type");
 
-  code.value = Command.code;
-  quantity.value = Command.quantity;
-  price.value = Command.price;
-  order_type.value = Command.order_type;
+  code.value = Order.code;
+  quantity.value = Order.quantity;
+  price.value = Order.price;
+  order_type.value = Order.order_type;
 
-  savedId = Command.id;
+  savedId = Order.id;
 });

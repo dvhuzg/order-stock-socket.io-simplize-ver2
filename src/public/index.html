@@ -24,10 +24,10 @@
     <div class="container h-100">
       <div class="row h-100">
         <div class="col-md-4 my-auto">
-          <form id="CommandForm" class="card card-body rounded-0">
-            <h1 class="h3 mb-5">Add a Command</h1>
+          <form id="OrderForm" class="card card-body rounded-0">
+            <h1 class="h3 mb-5">Add an Order</h1>
             <select class="form-select mb-3 rounded-0" aria-label="Default select example" id="code"  name="code" value="" aria-placeholder="DoHung">
-              <option selected>Choose a code...</option>
+              <option selected>Choose a Ticker Symbol...</option>
               <option value="ACB">ACB</option>
               <option value="FLD">FLD</option>
               <option value="HGF">HGF</option>
@@ -64,17 +64,16 @@
           <table class="table">
             <thead>
               <tr>
-               
-                <th scope="col">Code</th>
+                <th scope="col">No.</th>
+                <th scope="col">Securities</th>
                 <th scope="col">Remaining Quantity</th>
                 <th scope="col">Price</th>
                 <th scope="col">Order type</th>
-                <th scope="col">Newest fit</th>
-                <th scope="col">Index fit</th>
-                <th scope="col">Actions</th>
+                <th scope="col">Newest Match Order</th>
+                <th scope="col">Index Match Order</th>
               </tr>
             </thead>
-            <tbody id="Commands">
+            <tbody id="Orders">
               
             </tbody>
           </table>
